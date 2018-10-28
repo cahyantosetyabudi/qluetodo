@@ -62,6 +62,13 @@ class ViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is EditToDoViewController {
+            let viewController = segue.destination as! EditToDoViewController
+            let selectedRow = tableView.indexPathForSelectedRow?.row
+            viewController.todo = toDos[selectedRow!]
+        }
+    }
 
 }
 

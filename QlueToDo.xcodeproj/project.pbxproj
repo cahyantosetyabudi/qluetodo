@@ -16,6 +16,7 @@
 		795F854F2184D94900C4AA42 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F854E2184D94900C4AA42 /* ToDo.swift */; };
 		795F85512184DBDC00C4AA42 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F85502184DBDC00C4AA42 /* NetworkService.swift */; };
 		A4605C2321856237007B53FF /* AddToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4605C2221856237007B53FF /* AddToDoViewController.swift */; };
+		A4605C27218597F2007B53FF /* EditToDoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4605C26218597F2007B53FF /* EditToDoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		795F854E2184D94900C4AA42 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		795F85502184DBDC00C4AA42 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		A4605C2221856237007B53FF /* AddToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToDoViewController.swift; sourceTree = "<group>"; };
+		A4605C26218597F2007B53FF /* EditToDoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditToDoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				795F854E2184D94900C4AA42 /* ToDo.swift */,
 				795F85502184DBDC00C4AA42 /* NetworkService.swift */,
 				A4605C2221856237007B53FF /* AddToDoViewController.swift */,
+				A4605C26218597F2007B53FF /* EditToDoViewController.swift */,
 			);
 			path = QlueToDo;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 				795F853B2184D4B100C4AA42 /* ViewController.swift in Sources */,
 				795F85392184D4B100C4AA42 /* AppDelegate.swift in Sources */,
 				A4605C2321856237007B53FF /* AddToDoViewController.swift in Sources */,
+				A4605C27218597F2007B53FF /* EditToDoViewController.swift in Sources */,
 				795F854F2184D94900C4AA42 /* ToDo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

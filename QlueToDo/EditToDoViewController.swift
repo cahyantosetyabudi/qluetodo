@@ -1,39 +1,49 @@
 //
-//  NetworkService.swift
+//  EditToDoViewController.swift
 //  QlueToDo
 //
-//  Created by Cahyanto Setya Budi on 10/28/18.
+//  Created by Adam Mukharil Bachtiar on 28/10/18.
 //  Copyright © 2018 Cahyanto Setya Budi. All rights reserved.
 //
 
 import UIKit
 
-class AddToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var toDoLabel: UILabel!
     @IBOutlet weak var toDoField: UITextField!
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var statusPicker: UIPickerView!
+    @IBOutlet weak var toDoStatusLabel: UILabel!
+    @IBOutlet weak var toDoStatusPicker: UIPickerView!
     
-    var statusToDo = Bool()
+    let status = ["Selesai", "Belum"]
+    var todo: ToDo?
+    var statusToDo: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        toDoField.text = todo?.title
+
+        toDoStatusPicker.delegate = self
+        toDoStatusPicker.dataSource = self
         
-        statusPicker.dataSource = self
-        statusPicker.delegate = self
+        if (todo?.completed)! {
+            self.toDoStatusPicker.selectRow(0, inComponent: 0, animated: true)
+        } else {
+            self.toDoStatusPicker.selectRow(1, inComponent: 0, animated: true)
+        }
+
     }
 
-    let status = ["Selesai", "Belum"]
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return status.count
+        return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return status[row]
     }
     
@@ -44,32 +54,30 @@ class AddToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             statusToDo = false
         }
     }
-
-    @IBAction func addToDoButton(_ sender: UIButton) {
-//        let todo = ToDo(id: 201, userId: 11, title: "budi", completed: true)
+    
+    @IBAction func simpanButton(_ sender: UIButton) {
         let dicToDo: Dictionary<String, Any> = [
             "id": 201,
             "userId": 11,
             "title": "\(String(describing: toDoField.text))",
             "completed": statusToDo
         ]
-        addToDos(dicToDo)
-
+        editToDo(dicToDo)
     }
     
     private let session: URLSession = .shared
-    func addToDos(_ toDo: [String: Any]) {
-        let url = URL(string: "https://jsonplaceholder.typicode.com/todos")!
+    func editToDo(_ toDo: [String: Any]) {
+        let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(todo?.id)")!
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: toDo, options: .prettyPrinted)
         } catch let error {
             print(error.localizedDescription)
         }
-
+        
         
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let data = data else { return }
@@ -81,8 +89,6 @@ class AddToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             }
         }
         task.resume()
-        
     }
-
     
 }

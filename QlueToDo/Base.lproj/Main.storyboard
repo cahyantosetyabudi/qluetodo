@@ -56,6 +56,7 @@
                                         <connections>
                                             <outlet property="statusToDos" destination="b6q-92-wA6" id="TXL-Wt-TDI"/>
                                             <outlet property="toDoLabel" destination="thi-PM-rat" id="ILM-AT-JhU"/>
+                                            <segue destination="f8s-YY-nrZ" kind="show" id="MnL-kL-vTX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -88,10 +89,77 @@
             </objects>
             <point key="canvasLocation" x="976.79999999999995" y="33.733133433283363"/>
         </scene>
-        <!--Add To Do View Controller-->
+        <!--Edit To Do-->
+        <scene sceneID="WUm-a2-6pF">
+            <objects>
+                <viewController title="Edit To Do" id="f8s-YY-nrZ" customClass="EditToDoViewController" customModule="QlueToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nU9-m6-387">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Do" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtb-Zx-vNB">
+                                <rect key="frame" x="8" y="72" width="359" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bhu-08-N85">
+                                <rect key="frame" x="8" y="101" width="359" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRY-3I-89D">
+                                <rect key="frame" x="8" y="151" width="359" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pls-eT-PTT">
+                                <rect key="frame" x="8" y="180" width="375" height="216"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qec-V5-Bxc">
+                                <rect key="frame" x="161" y="416" width="52" height="30"/>
+                                <state key="normal" title="Simpan"/>
+                                <connections>
+                                    <action selector="simpanButton:" destination="f8s-YY-nrZ" eventType="touchUpInside" id="oUY-Jj-TYc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0bE-ta-qm9" firstAttribute="trailing" secondItem="rtb-Zx-vNB" secondAttribute="trailing" constant="8" id="3Tb-9U-Ecd"/>
+                            <constraint firstItem="Qec-V5-Bxc" firstAttribute="centerX" secondItem="nU9-m6-387" secondAttribute="centerX" id="FaC-tX-Mnu"/>
+                            <constraint firstItem="rtb-Zx-vNB" firstAttribute="top" secondItem="0bE-ta-qm9" secondAttribute="top" constant="8" id="P6K-Ce-64e"/>
+                            <constraint firstItem="cRY-3I-89D" firstAttribute="leading" secondItem="0bE-ta-qm9" secondAttribute="leading" constant="8" id="R6L-h3-Sr1"/>
+                            <constraint firstItem="0bE-ta-qm9" firstAttribute="trailing" secondItem="cRY-3I-89D" secondAttribute="trailing" constant="8" id="RZH-ml-tTQ"/>
+                            <constraint firstItem="Pls-eT-PTT" firstAttribute="top" secondItem="cRY-3I-89D" secondAttribute="bottom" constant="8" id="S7j-T9-oHi"/>
+                            <constraint firstItem="Bhu-08-N85" firstAttribute="top" secondItem="rtb-Zx-vNB" secondAttribute="bottom" constant="8" id="Ydx-Vs-3cr"/>
+                            <constraint firstItem="0bE-ta-qm9" firstAttribute="trailing" secondItem="Bhu-08-N85" secondAttribute="trailing" constant="8" id="ZJA-D1-fV2"/>
+                            <constraint firstItem="Pls-eT-PTT" firstAttribute="leading" secondItem="0bE-ta-qm9" secondAttribute="leading" constant="8" id="bIe-GI-ILV"/>
+                            <constraint firstItem="rtb-Zx-vNB" firstAttribute="leading" secondItem="0bE-ta-qm9" secondAttribute="leading" constant="8" id="fxJ-a0-zxT"/>
+                            <constraint firstItem="Qec-V5-Bxc" firstAttribute="top" secondItem="Pls-eT-PTT" secondAttribute="bottom" constant="20" id="ihg-w7-5LL"/>
+                            <constraint firstItem="Pls-eT-PTT" firstAttribute="trailing" secondItem="0bE-ta-qm9" secondAttribute="trailing" constant="8" id="lFw-FN-WYT"/>
+                            <constraint firstItem="Bhu-08-N85" firstAttribute="leading" secondItem="0bE-ta-qm9" secondAttribute="leading" constant="8" id="nHM-Bc-6D8"/>
+                            <constraint firstItem="cRY-3I-89D" firstAttribute="top" secondItem="Bhu-08-N85" secondAttribute="bottom" constant="20" id="w5m-zf-nh9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0bE-ta-qm9"/>
+                    </view>
+                    <connections>
+                        <outlet property="toDoField" destination="Bhu-08-N85" id="gqh-db-eBD"/>
+                        <outlet property="toDoLabel" destination="rtb-Zx-vNB" id="Nkl-Sh-Lsa"/>
+                        <outlet property="toDoStatusLabel" destination="cRY-3I-89D" id="rYD-H8-za4"/>
+                        <outlet property="toDoStatusPicker" destination="Pls-eT-PTT" id="Akl-Vv-AFC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S5U-P1-AUR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="977" y="794"/>
+        </scene>
+        <!--Add To Do-->
         <scene sceneID="V4M-oD-5Vo">
             <objects>
-                <viewController id="aXl-tJ-eN0" customClass="AddToDoViewController" customModule="QlueToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add To Do" id="aXl-tJ-eN0" customClass="AddToDoViewController" customModule="QlueToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Fa-iI-H9I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -118,8 +186,11 @@
                                 <rect key="frame" x="8" y="180" width="359" height="216"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IgR-5t-3DJ">
-                                <rect key="frame" x="161" y="416" width="52" height="30"/>
-                                <state key="normal" title="Simpan"/>
+                                <rect key="frame" x="147.5" y="416" width="79" height="30"/>
+                                <state key="normal" title="Tambahkan"/>
+                                <connections>
+                                    <action selector="addToDoButton:" destination="aXl-tJ-eN0" eventType="touchUpInside" id="wJi-PI-oob"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
