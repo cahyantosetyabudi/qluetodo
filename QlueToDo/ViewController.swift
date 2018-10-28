@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -42,26 +42,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         task.resume()
 
     }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDos.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HomeTableViewCell
-        cell.toDoLabel.text = toDos[indexPath.row].title
-        if toDos[indexPath.row].completed {
-            cell.statusToDos.text = "Selesai"
-        } else {
-            cell.statusToDos.text = "Belum"
-        }
-        
-        return cell
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is EditToDoViewController {
@@ -69,14 +49,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let selectedRow = tableView.indexPathForSelectedRow?.row
             viewController.todo = toDos[selectedRow!]
         }
-    }
-    
-
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action:UIContextualAction, view:UIView, nil) in
-            self.deleteToDo(self.toDos[indexPath.row].id)
-            }
-        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     func deleteToDo(_ id: Int) {
@@ -100,3 +72,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 }
 
+extension ViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HomeTableViewCell
+        cell.toDoLabel.text = toDos[indexPath.row].title
+        if toDos[indexPath.row].completed {
+            cell.statusToDos.text = "Selesai"
+        } else {
+            cell.statusToDos.text = "Belum"
+        }
+        
+        return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action:UIContextualAction, view:UIView, nil) in
+            self.deleteToDo(self.toDos[indexPath.row].id)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+}

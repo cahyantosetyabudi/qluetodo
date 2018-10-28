@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ToDo: Codable
+struct ToDo
 {
     let id: Int
     let userId: Int
@@ -27,8 +27,4 @@ extension ToDo: JSONDecodable
     }
 }
 
-//extension ToDo: Coda {
-//    func toJSON() throws -> Any {
-//        return try JSONEncoder.init()
-//    }
-//}
+

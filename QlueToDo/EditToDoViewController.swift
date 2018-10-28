@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class EditToDoViewController: UIViewController {
 
     @IBOutlet weak var toDoLabel: UILabel!
     @IBOutlet weak var toDoField: UITextField!
@@ -32,27 +32,6 @@ class EditToDoViewController: UIViewController, UIPickerViewDataSource, UIPicker
             self.toDoStatusPicker.selectRow(1, inComponent: 0, animated: true)
         }
 
-    }
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 2
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        return status[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 0 {
-            statusToDo = true
-        } else {
-            statusToDo = false
-        }
     }
     
     @IBAction func simpanButton(_ sender: UIButton) {
@@ -78,7 +57,6 @@ class EditToDoViewController: UIViewController, UIPickerViewDataSource, UIPicker
             print(error.localizedDescription)
         }
         
-        
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             guard let data = data else { return }
             do {
@@ -91,4 +69,29 @@ class EditToDoViewController: UIViewController, UIPickerViewDataSource, UIPicker
         task.resume()
     }
     
+}
+
+extension EditToDoViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return status[row]
+    }
+}
+
+extension EditToDoViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0 {
+            statusToDo = true
+        } else {
+            statusToDo = false
+        }
+    }
 }

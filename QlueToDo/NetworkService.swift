@@ -44,22 +44,6 @@ class JSONDecoder
     }    
 }
 
-//class JSONEncoder {
-//    let toDo: ToDo
-//    init(_ toDo: ToDo) {
-//        self.toDo = toDo
-//    }
-//}
-
-//func request(_ data: ToDo) throws -> JSONEncodable {
-//    let data: ToDo = try serialize(data)
-//    return try
-//}
-//
-//func serilizae(_ data: Data) -> <#return type#> {
-//    <#function body#>
-//}
-
 func parse<T>(_ data: Data) throws -> [T] where T: JSONDecodable
 {
     let jsonObjects: [JSONObject] = try deserialize(data)
@@ -78,7 +62,3 @@ func decode<T>(_ jsonObject: JSONObject) throws -> T where T: JSONDecodable
 {
     return try T.init(JSONDecoder(jsonObject))
 }
-
-//func encode(_ data: ToDo) throws -> JSONEncodable {
-//    return try JSONEncoder(data)
-//}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class AddToDoViewController: UIViewController {
 
     @IBOutlet weak var toDoLabel: UILabel!
     @IBOutlet weak var toDoField: UITextField!
@@ -25,25 +25,6 @@ class AddToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
 
     let status = ["Selesai", "Belum"]
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return status.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return status[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if row == 0 {
-            statusToDo = true
-        } else {
-            statusToDo = false
-        }
-    }
 
     @IBAction func addToDoButton(_ sender: UIButton) {
 //        let todo = ToDo(id: 201, userId: 11, title: "budi", completed: true)
@@ -83,6 +64,28 @@ class AddToDoViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         task.resume()
         
     }
+}
 
+extension AddToDoViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return status.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return status[row]
+    }
+}
+
+extension AddToDoViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row == 0 {
+            statusToDo = true
+        } else {
+            statusToDo = false
+        }
+    }
 }
