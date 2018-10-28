@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
         loadToDos()
     }
     
@@ -58,7 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         } else {
             cell.statusToDos.text = "Belum"
         }
-                
+        
         return cell
     }
     
@@ -68,6 +69,33 @@ class ViewController: UIViewController, UITableViewDataSource {
             let selectedRow = tableView.indexPathForSelectedRow?.row
             viewController.todo = toDos[selectedRow!]
         }
+    }
+    
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action:UIContextualAction, view:UIView, nil) in
+            self.deleteToDo(self.toDos[indexPath.row].id)
+            }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    func deleteToDo(_ id: Int) {
+        let url = URL(string: "https://jsonplaceholder.typicode.com/todos/\(id)")!
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    print(json)
+                }
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+        task.resume()
     }
 
 }
