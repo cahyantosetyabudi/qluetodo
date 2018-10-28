@@ -8,37 +8,21 @@
 
 import Foundation
 
-class ToDo {
-    var userId: Int
-    var id: Int
-    var title: String
-    var completed: Bool
-    
-    init(userId: Int, id: Int, title: String, completed: Bool) {
-        self.userId = userId
-        self.id = id
-        self.title = title
-        self.completed = completed
-    }
-    
-    static func requestAPI() -> [ToDo] {
-        var toDo = [ToDo]()
-        var networkService = NetworkService()
-        
-        let jsonFile = Bundle.main.path(forResource: "ToDo", ofType: "json")
-        let jsonFileURL = URL(fileURLWithPath: jsonFile!)
-        let jsonData = try? Data(contentsOf: jsonFileURL)
-        
-        if let jsonDictionary = networkService.parseJSONFromData(jsonData) {
-            print(jsonDictionary)
-//            let toDoDictionaries = jsonDictionary["episodes"] as! [[String : Any]]
-//            for toDoDictionary in toDoDictionaries {
-//                let newEpisode = Episode(epsDictionary: epsDictionary)
-//                episodes.append(newEpisode)
-//            }
-        }
-        
-        
-        return toDo
+struct ToDo
+{
+    let id: Int
+    let userId: Int
+    let title: String
+    let completed: Bool
+}
+
+
+extension ToDo: JSONDecodable
+{
+    init(_ decoder: JSONDecoder) throws {
+        self.id = try decoder.value(forKey: "id")
+        self.userId = try decoder.value(forKey: "userId")
+        self.title = try decoder.value(forKey: "title")
+        self.completed = try decoder.value(forKey: "completed")
     }
 }

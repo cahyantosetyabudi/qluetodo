@@ -11,6 +11,7 @@ import UIKit
 class HomeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var toDoLabel: UILabel!
+    @IBOutlet weak var statusToDos: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
